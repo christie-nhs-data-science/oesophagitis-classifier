@@ -1,0 +1,63 @@
+Phase: Oesophagitis
+Input: Token
+Options: control = brill
+
+MACRO: OESSTR
+(
+	{Token.string ==~ "(?i)oesophagitis|oesphagitis|eosophagitis|esophagitis|oesophagiti|oeosphagitis|oseophagitis|oesopahgitis|dysphagia|odynophagia"}
+)
+
+Rule: OesGrade2-1
+Priority: 100
+(  
+	(OESSTR
+		(
+			{Token.string == "="}{Token.string ==~ "(?i)1|2|i|ii"}|
+			{Token.string ==~ "(?i)grade|g"}{Token.string ==~ "(?i)1|2|i|ii"}
+		)
+	)|
+		{Token.string ==~ "(?i)grade|g"}{Token.string ==~ "(?i)1|2|i|ii"} ({Token.string ==~ "(?i)radiation|rt"})? OESSTR
+):label
+-->  
+:label.OESG2 = {RULE = "OesGrade2-1", GRADE = "2"}
+
+Rule: OesGrade2-2
+Priority: 100
+(  
+	(OESSTR)? {Token.string ==~ "(?i)\\((difficulty|discomfort|pain|painful|soreness)"} ({Token.string ==~ "in|on|when"})?{Token.string ==~ "(?i)swallowing|eating|drinking"}|
+):label
+-->  
+:label.OESG2 = {RULE = "OesGrade2-2", GRADE = "2"}
+
+
+Rule: OesGrade2-3
+Priority: 100
+({!Token.string==~"(?i)no|denies|without|negative"}):pre_context
+(  
+	({Token.string ==~ "(?i)mild|early"})? ({Token.string ==~ "(?i)radiation|rt"})? OESSTR
+):label
+-->  
+:label.OESG2 = {RULE = "OesGrade2-3", GRADE = "2"}
+
+Rule: OesGrade3-1
+Priority: 100
+(  
+	(OESSTR
+		(
+			{Token.string == "="}{Token.string ==~ "(?i)3|iii"}|
+			{Token.string ==~ "(?i)grade|g"}{Token.string ==~ "(?i)3|iii"}
+		)
+	)|
+		{Token.string ==~ "(?i)grade|g"}{Token.string ==~ "(?i)3|iii"} ({Token.string ==~ "(?i)radiation|rt"})? OESSTR
+):label
+-->  
+:label.OESG3 = {RULE = "OesGrade3-1", GRADE = "3"}
+
+
+Rule: OesGrade3-2
+Priority: 100
+(  
+	{Token.string ==~ "(?i)admission|admitted"} ({Token, !Token.string=="."})[1,7] OESSTR
+):label
+-->  
+:label.OESG3 = {RULE = "OesGrade3-2", GRADE = "3"}
