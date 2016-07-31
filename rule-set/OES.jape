@@ -24,7 +24,7 @@ Priority: 100
 Rule: OesGrade2-2
 Priority: 100
 (  
-	(OESSTR)? {Token.string ==~ "(?i)\\((difficulty|discomfort|pain|painful|soreness)"} ({Token.string ==~ "in|on|when"})?{Token.string ==~ "(?i)swallowing|eating|drinking"}|
+	(OESSTR)? {Token.string ==~ "(?i)\\((difficulty|discomfort|pain|painful|soreness)"} ({Token.string ==~ "in|on|when"})?{Token.string ==~ "(?i)swallowing|eating|drinking"}
 ):label
 -->  
 :label.OESG2 = {RULE = "OesGrade2-2", GRADE = "2"}
