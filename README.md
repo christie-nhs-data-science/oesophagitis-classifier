@@ -8,6 +8,6 @@ This component is an oesophagitis toxicity identifier and may easily be adapted 
 This resource is a GATE application. The application can be loaded using the **oes-pipeline.gapp** file in the *pipeline* sub-directory.
 
 ## ACKNOWLEDGEMENT
-* Kardo Ala'Aldeen and Constantin Blaum - dataset annotators
+* Kardo Ala'Aldeen and Constantin Blaum - data annotators
 * Tom Liptrot and Jason Kennedy - data support
 
