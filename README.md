@@ -9,5 +9,5 @@ This resource is a GATE application. The application can be loaded using the **o
 
 ## ACKNOWLEDGEMENT
 * Kardo Ala'Aldeen and Constantin Blaum - dataset annotators
-* Tom Liptrot
+* Tom Liptrot and Jason Kennedy - data support
 
