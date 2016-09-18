@@ -1,0 +1,32 @@
+/*hypothetical and negation mentions*/
+Phase: Hypothetical-and-Negation
+Input: Token
+Options: control = brill
+
+Rule: Neg1
+Priority: 100
+(  
+	{Token.string ==~ "(?i)may|can"} ({Token.string ==~ "(?i)also"})? {Token.string ==~ "(?i)include|cause"}|  
+	{Token.string ==~ "(?i)side"} {Token.string ==~ "(?i)effects?"}|
+	{Token.string ==~ "(?i)side-effects?"}|  
+	{Token.string ==~ "(?i)risks?"} {Token.string ==~ "(?i)of"}|
+	{Token.string ==~ "(?i)expected"}
+):label
+-->  
+:label.Neg1 = {RULE = "Neg1"}
+
+Rule: Neg2
+Priority: 100
+(  
+	{Token.string ==~ "(?i)not"}{Token.string ==~ "(?i)suffered|complain"} ({Token.string ==~ "(?i)with|of"})? {Token.string ==~ "(?i)any"}|
+	{Token.string ==~ "(?i)did"} {Token.string ==~ "(?i)not"}{Token.string ==~ "(?i)get|have|report"}|
+	{Token.string ==~ "(?i)no"}	{Token.string ==~ "(?i)problem"}{Token.string ==~ "(?i)with"}|
+	{Token.string==~"(?i)not"}{Token.string==~"(?i)experienced"}{Token.string==~"(?i)any"}|
+	{Token.string==~"(?i)no"}{Token.string==~"(?i)evidence"} |
+	{Token.string==~"(?i)without"}{Token.string==~"(?i)any"} |
+	{Token.string==~"(?i)no|denies|without|negative|unlikely"} |
+	{Token.string==~"(?i)reflux|eosinophilic"}
+
+):label
+-->  
+:label.Neg2 = {RULE = "Neg2"}

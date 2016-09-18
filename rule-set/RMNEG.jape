@@ -1,0 +1,32 @@
+/* Remove hypothetical and negated mentions*/
+Phase: RemoveNegatedMentions
+Input: Token Neg1 Neg2 OESG2
+Options: control = all
+
+Rule: Neg1
+(  
+{Neg1}
+({Token, !Token.string=="."})*
+):pre
+(
+{OESG2} 
+):label
+-->  
+:label {
+	AnnotationSet as = bindings.get("label");
+	outputAS.removeAll(as);
+}
+
+Rule: Neg2
+(  
+{Neg2}
+({Token, !Token.string=="."})[0,4]
+):pre
+(
+{OESG2} 
+):label
+-->  
+:label {
+	AnnotationSet as = bindings.get("label");
+	outputAS.removeAll(as);
+}
